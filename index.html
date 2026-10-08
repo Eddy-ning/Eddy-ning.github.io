@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《追风筝的人》——名著讲解视频制作全流程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'STSong', serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(15,52,96,0.3) 0%, rgba(26,26,46,0.9) 100%);
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    color: #f0c040;
+    text-shadow: 0 2px 20px rgba(240,192,64,0.3);
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .hero .subtitle {
+    font-size: 1.1rem;
+    color: #a0b0c0;
+    margin-bottom: 30px;
+  }
+  .video-container {
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(240,192,64,0.2);
+  }
+  .video-container video {
+    width: 100%;
+    display: block;
+  }
+  .video-label {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    color: #8090a0;
+  }
+
+  /* Content sections */
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    color: #f0c040;
+    border-left: 4px solid #f0c040;
+    padding-left: 16px;
+    margin-bottom: 30px;
+  }
+  .step-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 28px 30px;
+    margin-bottom: 24px;
+    transition: border-color 0.3s;
+  }
+  .step-card:hover {
+    border-color: rgba(240,192,64,0.3);
+  }
+  .step-label {
+    display: inline-block;
+    background: linear-gradient(135deg, #f0c040, #d4a020);
+    color: #1a1a2e;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .step-content {
+    color: #d0d0d0;
+    font-size: 1.05rem;
+  }
+  .step-content strong {
+    color: #f0c040;
+  }
+
+  /* Title result */
+  .title-result {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(240,192,64,0.08), rgba(15,52,96,0.08));
+    border-radius: 12px;
+    border: 1px solid rgba(240,192,64,0.15);
+  }
+  .title-result .book-title {
+    font-size: 2rem;
+    color: #f0c040;
+    margin-bottom: 8px;
+  }
+  .title-result .book-subtitle {
+    font-size: 1.3rem;
+    color: #c0d0e0;
+  }
+
+  /* Image gallery */
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .image-item {
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .image-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(240,192,64,0.3);
+  }
+  .image-item img {
+    width: 100%;
+    display: block;
+  }
+  .image-item .image-caption {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    color: #a0b0c0;
+  }
+  .image-item .image-caption .caption-title {
+    color: #f0c040;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .image-desc-block {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    border-left: 3px solid rgba(240,192,64,0.3);
+  }
+  .image-desc-block .desc-label {
+    color: #f0c040;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  .image-desc-block .desc-text {
+    color: #c0c8d0;
+    font-size: 0.98rem;
+  }
+
+  /* Video segments gallery */
+  .video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .video-item {
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .video-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(240,192,64,0.3);
+  }
+  .video-item video {
+    width: 100%;
+    display: block;
+    background: #000;
+  }
+  .video-item .video-caption {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    color: #a0b0c0;
+  }
+  .video-item .video-caption .caption-title {
+    color: #f0c040;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Process flow */
+  .process-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+    justify-content: center;
+  }
+  .process-step {
+    background: rgba(240,192,64,0.08);
+    border: 1px solid rgba(240,192,64,0.2);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    color: #c0d0e0;
+  }
+  .process-step .step-num {
+    color: #f0c040;
+    font-weight: bold;
+    margin-right: 6px;
+  }
+  .arrow {
+    color: rgba(240,192,64,0.4);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Draft section */
+  .draft-info {
+    background: rgba(15,52,96,0.15);
+    border: 1px solid rgba(15,52,96,0.3);
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+  .draft-info ul {
+    list-style: none;
+    padding: 0;
+  }
+  .draft-info li {
+    padding: 6px 0;
+    color: #b0c0d0;
+    font-size: 0.98rem;
+  }
+  .draft-info li::before {
+    content: "▸ ";
+    color: #f0c040;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #606070;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* Subtitle display */
+  .subtitle-list {
+    margin-top: 16px;
+  }
+  .subtitle-item {
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    border-left: 3px solid rgba(240,192,64,0.2);
+    font-size: 0.95rem;
+    color: #c0c8d0;
+  }
+  .subtitle-item .sub-num {
+    color: #f0c040;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero / Video Embed ===== -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>《追风筝的人》——一只风筝牵起的救赎之路</h1>
+    <p class="subtitle">名著讲解视频 · 制作全流程展示</p>
+    <div class="video-container">
+      <video controls preload="metadata" poster="">
+        <source src="剪映草稿_追风筝的人.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+    </div>
+    <p class="video-label">▲ 最终成片 · 剪映草稿导出视频</p>
+  </div>
+</div>
+
+<!-- ===== Process Overview ===== -->
+<div class="section">
+  <h2 class="section-title">制作流程总览</h2>
+  <div class="process-flow">
+    <div class="process-step"><span class="step-num">01</span>生成标题</div>
+    <div class="arrow">→</div>
+    <div class="process-step"><span class="step-num">02</span>编写讲解剧本</div>
+    <div class="arrow">→</div>
+    <div class="process-step"><span class="step-num">03</span>撰写画面描述</div>
+    <div class="arrow">→</div>
+    <div class="process-step"><span class="step-num">04</span>AI 生成配图</div>
+    <div class="arrow">→</div>
+    <div class="process-step"><span class="step-num">05</span>AI 生成视频片段</div>
+    <div class="arrow">→</div>
+    <div class="process-step"><span class="step-num">06</span>装配剪映草稿</div>
+  </div>
+</div>
+
+<!-- ===== Step 1: Title ===== -->
+<div class="section">
+  <h2 class="section-title">第一步：标题生成</h2>
+  <div class="step-card">
+    <span class="step-label">AI 生成</span>
+    <div class="step-content">
+      <p>输入名著名称《追风筝的人》，AI 自动生成标题：</p>
+      <div class="title-result" style="margin-top:20px;">
+        <div class="book-title">《追风筝的人》</div>
+        <div class="book-subtitle">—— 一只风筝牵起的救赎之路</div>
+      </div>
+      <p style="margin-top:16px; font-size:0.95rem; color:#90a0b0;">
+        以"风筝"这一核心意象为切入点，点明"救赎"主题——主人公阿米尔因童年背叛背负半生愧疚，最终踏上自我救赎之路。风筝既是哈桑忠诚与纯真的象征，也是阿米尔内心永远的牵挂。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Step 2: Script ===== -->
+<div class="section">
+  <h2 class="section-title">第二步：讲解剧本</h2>
+  <p style="color:#90a0b0; margin-bottom:20px;">共5段，格式为【类别】：【文字介绍】，适合视频口播。</p>
+
+  <div class="step-card">
+    <span class="step-label">时代背景</span>
+    <div class="step-content">
+      小说以阿富汗从和平到战乱的三十年巨变为背景，从二十世纪七十年代君主制末期的相对繁荣，到苏联入侵、塔利班政权建立，整个国家的动荡变迁成为主人公命运起伏的宏大舞台。
+    </div>
+  </div>
+
+  <div class="step-card">
+    <span class="step-label">内容简介 ①</span>
+    <div class="step-content">
+      阿米尔和哈桑是一起长大的主仆兄弟，一个是富家少爷，一个是仆人的儿子，他们最爱的游戏是追风筝。在一次风筝大赛后，哈桑为了替阿米尔追回风筝而遭受了侮辱，阿米尔却因为懦弱选择了逃避，这件事成为他一生的愧疚。
+    </div>
+  </div>
+
+  <div class="step-card">
+    <span class="step-label">内容简介 ②</span>
+    <div class="step-content">
+      后来苏联入侵阿富汗，阿米尔随父亲逃往美国，在异乡艰难谋生。多年后，一个电话打破了平静的生活——"那里有再次成为好人的路"，阿米尔决定回到战火中的阿富汗，为当年的过错寻求救赎。
+    </div>
+  </div>
+
+  <div class="step-card">
+    <span class="step-label">内容简介 ③</span>
+    <div class="step-content">
+      阿米尔历尽艰险救出了哈桑的儿子索拉博，带他回到美国。他终于明白，哈桑其实是自己同父异母的兄弟。在结尾，阿米尔为索拉博追起了风筝，说出了那句"为你，千千万万遍"，完成了迟到二十年的自我救赎。
+    </div>
+  </div>
+
+  <div class="step-card">
+    <span class="step-label">现实意义</span>
+    <div class="step-content">
+      每个人心中都有一只需要去追的风筝——它可能是勇气、是真诚、是面对过去的担当。这本书告诉我们，犯错并不可怕，真正重要的是你是否愿意踏上那条"再次成为好人的路"，勇敢地面对自己的内心。
+    </div>
+  </div>
+</div>
+
+<!-- ===== Step 3: Image Descriptions ===== -->
+<div class="section">
+  <h2 class="section-title">第三步：画面描述（生图提示词）</h2>
+  <p style="color:#90a0b0; margin-bottom:20px;">为每段剧本撰写详细静态画面描述，不少于50字，末尾标注"真实纪实电影大片风格"。</p>
+
+  <div class="image-desc-block">
+    <div class="desc-label">【时代背景画面】</div>
+    <div class="desc-text">喀布尔老城区的一条街道，左侧是七十年代末相对繁华的街景——穿着西装的男士走过，路边有卖水果的摊贩，孩子们在巷口追逐；右侧是被战火摧残后的废墟——断壁残垣、弹孔密布的墙壁，尘土飞扬中一个孤独的身影背着行囊远去。天空中飘浮着几只风筝，一半是蓝天白云，一半是硝烟弥漫。真实纪实电影大片风格。</div>
+  </div>
+
+  <div class="image-desc-block">
+    <div class="desc-label">【内容简介画面 1】</div>
+    <div class="desc-text">一条狭窄昏暗的小巷尽头，穿着破旧衣服的哈桑蜷缩在角落，怀里紧紧抱着一只蓝色的风筝，脸上带着倔强而恐惧的表情。巷口逆光站着几个模糊的少年身影，光影从他们身后投射进来，在地面上拉出长长的影子。墙壁上斑驳的纹理和地上散落的杂物，营造出压抑而紧张的氛围。真实纪实电影大片风格。</div>
+  </div>
+
+  <div class="image-desc-block">
+    <div class="desc-label">【内容简介画面 2】</div>
+    <div class="desc-text">美国旧金山一间狭小的公寓内，中年阿米尔背对着窗户站在电话机旁，手中紧紧握着听筒，脸上写满震惊与挣扎。窗外是灰蒙蒙的城市天际线，雨水顺着玻璃流下，模糊了外面的世界。桌上散落着几页信纸和一张泛黄的老照片，照片上是两个少年在阿富汗的阳光下奔跑。真实纪实电影大片风格。</div>
+  </div>
+
+  <div class="image-desc-block">
+    <div class="desc-label">【内容简介画面 3】</div>
+    <div class="desc-text">一片开阔的绿草地上，阳光温暖地洒下来，中年阿米尔在前方奔跑着追一只红色的风筝，他的脸上带着释然的笑容。身后不远处，小男孩索拉博静静地站着，眼神中第一次流露出微光。风轻轻吹动着他们的头发，草地上投下长长的影子，整个画面充满了希望与治愈的感觉。真实纪实电影大片风格。</div>
+  </div>
+
+  <div class="image-desc-block">
+    <div class="desc-label">【现实意义画面】</div>
+    <div class="desc-text">一条蜿蜒的土路延伸向远方，路的分岔口站着一个模糊的人影，他抬头望向天空。天空中有一只风筝在云层中若隐若现，金色的阳光从云层缝隙中穿透下来，照亮了前方的道路。地面上是他长长的影子，周围空旷而寂静，整个画面充满了象征意义和哲学思考的氛围。真实纪实电影大片风格。</div>
+  </div>
+</div>
+
+<!-- ===== Step 4: Images ===== -->
+<div class="section">
+  <h2 class="section-title">第四步：AI 生成配图（5张）</h2>
+  <p style="color:#90a0b0; margin-bottom:20px;">使用 Seedream AI 图片生成，分辨率 1440×2560，9:16 竖屏比例。</p>
+
+  <div class="image-gallery">
+    <div class="image-item">
+      <img src="图片/01_时代背景.jpg" alt="时代背景">
+      <div class="image-caption">
+        <span class="caption-title">01 · 时代背景</span>
+        喀布尔老城区繁华与废墟的对比画面
+      </div>
+    </div>
+    <div class="image-item">
+      <img src="图片/02_内容简介1.jpg" alt="内容简介1">
+      <div class="image-caption">
+        <span class="caption-title">02 · 内容简介 ①</span>
+        哈桑在小巷尽头紧抱蓝色风筝
+      </div>
+    </div>
+    <div class="image-item">
+      <img src="图片/03_内容简介2.jpg" alt="内容简介2">
+      <div class="image-caption">
+        <span class="caption-title">03 · 内容简介 ②</span>
+        阿米尔在美国公寓接到命运电话
+      </div>
+    </div>
+    <div class="image-item">
+      <img src="图片/04_内容简介3.jpg" alt="内容简介3">
+      <div class="image-caption">
+        <span class="caption-title">04 · 内容简介 ③</span>
+        阿米尔带索拉博在草地追风筝
+      </div>
+    </div>
+    <div class="image-item">
+      <img src="图片/05_现实意义.jpg" alt="现实意义">
+      <div class="image-caption">
+        <span class="caption-title">05 · 现实意义</span>
+        分岔路口仰望天空中若隐若现的风筝
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Step 5: Video Segments ===== -->
+<div class="section">
+  <h2 class="section-title">第五步：AI 生成视频片段（8段）</h2>
+  <p style="color:#90a0b0; margin-bottom:20px;">使用 Seedance AI 视频生成，首尾帧模式，480p，9:16 竖屏，每段5秒。</p>
+
+  <div class="video-gallery">
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频01_和平喀布尔.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 01 · 和平喀布尔</span>
+        繁华街道上人们生活，风筝在蓝天白云中飘浮
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频02_战乱废墟.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 02 · 战乱废墟</span>
+        战火摧残后的废墟，孤独身影背着行囊远去
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频03_小巷哈桑.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 03 · 小巷哈桑</span>
+        哈桑蜷缩在小巷角落紧抱蓝色风筝
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频04_公寓电话.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 04 · 公寓电话</span>
+        阿米尔在旧金山公寓中接到命运电话
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频05_命运电话.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 05 · 命运电话</span>
+        阿米尔紧握听筒，窗外雨水模糊城市天际线
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频06_草地追风筝.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 06 · 草地追风筝</span>
+        阿米尔奔跑追红风筝，索拉博远远望着
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频07_索拉博的微笑.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 07 · 索拉博的微笑</span>
+        索拉博眼中第一次流露微光与笑容
+      </div>
+    </div>
+    <div class="video-item">
+      <video controls preload="metadata">
+        <source src="视频/视频08_分岔路口.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        <span class="caption-title">视频 08 · 分岔路口</span>
+        人影站在分岔路口仰望天空中若隐若现的风筝
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Step 6: Draft Assembly ===== -->
+<div class="section">
+  <h2 class="section-title">第六步：装配剪映草稿</h2>
+  <div class="step-card">
+    <span class="step-label">自动化流程</span>
+    <div class="step-content">
+      <p>编写 Python 脚本 <code style="color:#f0c040; background:rgba(240,192,64,0.08); padding:2px 8px; border-radius:4px;">build_draft.py</code>，自动生成剪映 11.x 格式的草稿文件：</p>
+      <div class="draft-info" style="margin-top:16px;">
+        <ul>
+          <li>画布尺寸：720 × 1280（9:16 竖屏）</li>
+          <li>帧率：30 fps</li>
+          <li>总时长：约 40.33 秒</li>
+          <li>视频轨道：8 段视频依次排列，每段 5.04 秒</li>
+          <li>字幕轨道：8 段字幕与视频同步对应</li>
+          <li>格式版本：new_version: "110.0.0"</li>
+          <li>输出文件：draft_content.json / draft_meta_info.json / draft_info.json</li>
+          <li>视频素材拷贝至 media/ 子目录</li>
+        </ul>
+      </div>
+
+      <div class="subtitle-list" style="margin-top:20px;">
+        <h3 style="color:#f0c040; font-size:1.1rem; margin-bottom:12px;">8段字幕内容</h3>
+        <div class="subtitle-item"><span class="sub-num">01</span>二十世纪七十年代的阿富汗，君主制末期的喀布尔繁华而宁静，人们过着平静祥和的生活。</div>
+        <div class="subtitle-item"><span class="sub-num">02</span>然而苏联入侵、塔利班政权建立，短短三十年，这个国家从和平坠入了战乱的深渊。</div>
+        <div class="subtitle-item"><span class="sub-num">03</span>阿米尔和哈桑是一起长大的主仆兄弟，一个富家少爷，一个仆人的儿子，他们最爱的游戏是追风筝。</div>
+        <div class="subtitle-item"><span class="sub-num">04</span>苏联入侵后，阿米尔随父亲逃往美国，在异乡从零开始，艰难地谋生度日。</div>
+        <div class="subtitle-item"><span class="sub-num">05</span>多年后，一个电话打破了平静——那里有再次成为好人的路。阿米尔决定回到战火中的阿富汗。</div>
+        <div class="subtitle-item"><span class="sub-num">06</span>阿米尔历尽艰险救出了哈桑的儿子索拉博，他这才知道，哈桑竟是自己同父异母的兄弟。</div>
+        <div class="subtitle-item"><span class="sub-num">07</span>结尾，阿米尔为索拉博追起了风筝，说出了那句为你千千万万遍，完成了迟到二十年的自我救赎。</div>
+        <div class="subtitle-item"><span class="sub-num">08</span>每个人心中都有一只需要去追的风筝——它是勇气，是真诚，是面对过去的担当。犯错并不可怕，重要的是你是否愿意踏上那条再次成为好人的路。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Tech Stack ===== -->
+<div class="section">
+  <h2 class="section-title">技术栈</h2>
+  <div class="step-card">
+    <div class="step-content">
+      <table style="width:100%; border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td style="padding:10px; color:#f0c040; font-weight:bold; width:30%;">文案生成</td>
+          <td style="padding:10px; color:#c0c8d0;">AI 大语言模型</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td style="padding:10px; color:#f0c040; font-weight:bold;">配图生成</td>
+          <td style="padding:10px; color:#c0c8d0;">Seedream AI 图片生成 API（1440×2560，9:16）</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td style="padding:10px; color:#f0c040; font-weight:bold;">视频生成</td>
+          <td style="padding:10px; color:#c0c8d0;">Seedance AI 视频生成 API（480p，9:16，首尾帧模式，5秒/段）</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td style="padding:10px; color:#f0c040; font-weight:bold;">草稿装配</td>
+          <td style="padding:10px; color:#c0c8d0;">Python 脚本 + JSON（剪映 11.x 草稿格式）</td>
+        </tr>
+        <tr>
+          <td style="padding:10px; color:#f0c040; font-weight:bold;">技能封装</td>
+          <td style="padding:10px; color:#c0c8d0;">novel-video-draft Skill（可复用于任意名著）</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>名著讲解视频制作全流程 · 基于追风筝的人测试项目</p>
+  <p style="margin-top:6px;">AI 文案 → AI 配图 → AI 视频 → 自动装配剪映草稿</p>
+</footer>
+
+</body>
+</html>
